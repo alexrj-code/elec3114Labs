@@ -3,7 +3,7 @@
 %--#############################################################
 
 % Load the MAT file:
-load('PreLab1_Data.mat'); 
+load('PreLab1_Data.mat');
 
 % Extract data from the discSpeed matrix:
 t_orig = discSpeed(:,1); % extracts first column
@@ -24,7 +24,6 @@ ylabel('Disc Speed (rpm)');
 grid on;
 
 
-
 %%-#############################################################
 % Q2:   Trucate the data
 %--#############################################################
@@ -39,14 +38,13 @@ disc_speed_trunc = disc_speed_orig(1001:end); % skips first 1000 rows
 t_trunc = t_orig(1001:end) - t_orig(1001);    % dittoo, but shift time 
                                               % vector so starts at zero
 
+
 % Plot both the ORIGINAL and TRUNCATED data sets:
 try
   close("Q2_FIG_01")
 catch
 end
 figure("Name", "Q2_FIG_01");
-
-figure;
 
 subplot(2, 1, 1); %two rows, 1 column first plot. Edit first frame
 plot(t_orig, disc_speed_orig);
@@ -89,7 +87,6 @@ disc_speed_ready = disc_speed_offset_free(1001:end); % save only after 1kth entr
 t_ready = t_offset_free(1001:end) - t_offset_free(1001); % start at 0
 
 
-
 % Plot both the OFFSET-FREE data set and the "ready" TRUNCATED OFFSET-FREE data set
 
 try
@@ -117,8 +114,7 @@ grid on;
 % Q5a:   Filtering the noise part 1 of 2  (Preserve signal shape)
 %--############################################################# 
 
-% create Y_disc and T  
-% i.e get 4000 sampless and put in Y_disc and T
+% create Y_disc and T   
 Y_disc = disc_speed_ready(1:4000);
 T = t_ready(1:4000);
 
@@ -128,14 +124,13 @@ a = 1;
 
 b = ones(1, N+1) / (N+1);
 
-
-
 % apply the filter and create Y_disc_filtered_A
 
-% this creates 21 ones, then divides them by 21 to create a 'weight factor'
 Y_disc_filtered_A = filter(b, a, Y_disc);
-% this applies factor to signal, 
-% at every point in time, replace measurement with average of last 21 sigs
+    % this applies factor to signal, 
+    % at every point in time, replace measurement with average of last 21 sigs
+
+
 
 % Plot:
 %   T  vs  Y_disc vs 
@@ -166,12 +161,13 @@ N = 200;
 a = 1;
 
 b = ones(1, N+1) / (N+1);
-
-% same thing but now 200 avg instead of 21
-
+    % same thing but now 200 avg instead of 21
     
 % apply the filter and create Y_disc_filtered_B
+
 Y_disc_filtered_B = filter(b, a, Y_disc);
+
+
 
 % Plot:
 %   T  vs  Y_disc vs 
@@ -195,6 +191,4 @@ ylabel('Disc Speed (rpm)');
 legend('Raw signal', 'Filter A signal', 'Filter B signal');
 grid on;
 
-
-
-        
+% shazam
